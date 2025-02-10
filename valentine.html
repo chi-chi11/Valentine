@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? 💖</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden; /* Prevents scrolling when button gets too big */
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header_text {
+            font-size: 2.5em;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .gif_container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .yes-button, .no-button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .yes-button {
+            background-color: #ff4081;
+            color: white;
+            transition: font-size 0.3s ease-in-out;
+        }
+
+        .no-button {
+            background-color: #ff1744;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* This will make the button cover the whole screen */
+        .massive {
+            font-size: 100vh !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <h1 class="header_text">Will you be my Valentine? 💘</h1>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+        </div>
+        <div class="buttons">
+            <button class="yes-button" onclick="handleYesClick()">Yes 💖</button>
+            <button class="no-button" onclick="handleNoClick()">No 😢</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="successContainer">
+        <h1 class="header_text">I knew you'd say yes, Pookie! 🥰</h1>
+        <div class="gif_container">
+            <img src="https://media.tenor.com/0WJv21ZpZzMAAAAC/cute-love.gif" alt="Love GIF">
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Are you sure? 🥺",
+            "Are you really sure? 😢",
+            "Are you actually really sure? 😭",
+            "Are you sure Ani? 💕",
+            "Are you sure bbg??? 🥰",
+            "Are you reallyyy sure??? 😖",
+            "Sweetheart?? 🥺💖",
+            "I will be sad if you say no... 😞",
+            "I will be very sad... 😔",
+            "I'm gonna be sad :((( 😭",
+            "I'm giving you one last chance... 🤨",
+            "I'm jk, are you sure bbg? 😛",
+            "You're breaking my heart... 😭"
+        ];
+
+        let messageIndex = 0;
+        let yesButton = document.querySelector('.yes-button');
+        let noButton = document.querySelector('.no-button');
+
+        function handleNoClick() {
+            if (messageIndex < messages.length - 1) {
+                noButton.textContent = messages[messageIndex];
+                messageIndex++;
+            } else {
+                noButton.textContent = messages[messages.length - 1]; // Last message stays
+            }
+
+            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            let newSize = currentSize * 1.5;
+            yesButton.style.fontSize = `${newSize}px`;
+
+            // If Yes button is big enough, make it take over the screen
+            if (newSize > window.innerHeight * 0.8) {
+                yesButton.classList.add("massive");
+            }
+        }
+
+        function handleYesClick() {
+            document.getElementById("mainContainer").classList.add("hidden");
+            document.getElementById("successContainer").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+</html>
+
